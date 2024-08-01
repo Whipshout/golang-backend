@@ -1,0 +1,70 @@
+services:
+  app:
+    build:
+      context: ../..
+      dockerfile: docker/dev/Dockerfile
+    container_name: golang-backend
+    networks:
+      - test-net
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_DB: postgres_db
+      MONGO_HOST: mongo
+      REDIS_HOST: redis
+#    depends_on:
+#      - postgres
+#      - mongo
+#      - redis
+    ports:
+      - "8080:8080"
+    logging:
+      driver: none
+
+  test:
+    build:
+      context: ../..
+      dockerfile: docker/test/Dockerfile
+    container_name: golang-backend-test
+    networks:
+      - test-net
+    depends_on:
+      - app
+    logging:
+      driver: none
+
+#  postgres:
+#    image: postgres:latest
+#    container_name: postgres
+#    restart: always
+#    environment:
+#      POSTGRES_USER: postgres_user
+#      POSTGRES_PASSWORD: postgres_password
+#      POSTGRES_DB: postgres_db
+#    networks:
+#      - test-net
+#    logging:
+#      driver: none
+#
+#  mongo:
+#    image: mongo:latest
+#    container_name: mongo
+#    restart: always
+#    networks:
+#      - test-net
+#    logging:
+#      driver: none
+#
+#  redis:
+#    image: redis:latest
+#    container_name: redis
+#    restart: always
+#    networks:
+#      - test-net
+#    logging:
+#      driver: none
+
+networks:
+  test-net:
+    driver: bridge

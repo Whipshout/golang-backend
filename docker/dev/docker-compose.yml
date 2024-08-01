@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ../..
+      dockerfile: docker/dev/Dockerfile
+    container_name: golang-backend
+    ports:
+      - "8080:8080"
+#    depends_on:
+#      - postgres
+#      - mongo
+#      - redis
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_DB: postgres_db
+      MONGO_HOST: mongo
+      REDIS_HOST: redis
+
+#  postgres:
+#    image: postgres:latest
+#    container_name: postgres
+#    restart: always
+#    environment:
+#      POSTGRES_USER: postgres_user
+#      POSTGRES_PASSWORD: postgres_password
+#      POSTGRES_DB: postgres_db
+#    ports:
+#      - "5432:5432"
+#
+#  mongo:
+#    image: mongo:latest
+#    container_name: mongo
+#    restart: always
+#    ports:
+#      - "27017:27017"
+#
+#  redis:
+#    image: redis:latest
+#    container_name: redis
+#    restart: always
+#    ports:
+#      - "6379:6379"
