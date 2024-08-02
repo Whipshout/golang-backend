@@ -1,18 +1,18 @@
 services:
   app:
     build:
-      context: ../..
+      context: ../../
       dockerfile: docker/dev/Dockerfile
     container_name: golang-backend
     networks:
       - test-net
-    environment:
-      POSTGRES_HOST: postgres
-      POSTGRES_USER: postgres_user
-      POSTGRES_PASSWORD: postgres_password
-      POSTGRES_DB: postgres_db
-      MONGO_HOST: mongo
-      REDIS_HOST: redis
+    # environment:
+    #   POSTGRES_HOST: postgres
+    #   POSTGRES_USER: postgres_user
+    #   POSTGRES_PASSWORD: postgres_password
+    #   POSTGRES_DB: postgres_db
+    #   MONGO_HOST: mongo
+    #   REDIS_HOST: redis
 #    depends_on:
 #      - postgres
 #      - mongo
@@ -24,15 +24,13 @@ services:
 
   test:
     build:
-      context: ../..
+      context: ../../
       dockerfile: docker/test/Dockerfile
     container_name: golang-backend-test
     networks:
       - test-net
     depends_on:
       - app
-    logging:
-      driver: none
 
 #  postgres:
 #    image: postgres:latest

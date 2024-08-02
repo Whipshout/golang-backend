@@ -8,6 +8,4 @@ RUN go mod download
 
 COPY . .
 
-RUN apk add --no-cache curl
-
 CMD ["go", "test", "-v", "./tests/integration/..."]
