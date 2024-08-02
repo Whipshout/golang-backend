@@ -6,9 +6,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        task: [integration-tests]
 
     steps:
       - name: Checkout code
@@ -35,5 +32,5 @@ jobs:
           version: latest
           args: --timeout 5m ./...
 
-      - name: Run ${{ matrix.task }}
-        run: make ${{ matrix.task }}
+      - name: Run integration tests
+        run: make integration-tests
