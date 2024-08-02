@@ -1,8 +1,3 @@
-DOCKER_COMPOSE_FILE_TEST = docker/test-integration/docker-compose.yml
-DOCKER_COMPOSE_TEST = docker-compose -f $(DOCKER_COMPOSE_FILE_TEST)
-DOCKER_COMPOSE_FILE_DEV = docker/dev/docker-compose.yml
-DOCKER_COMPOSE_DEV = docker-compose -f $(DOCKER_COMPOSE_FILE_DEV)
-
 # Build and Run the Go binary locally
 .PHONY: run-local
 run-local:
