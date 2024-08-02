@@ -3,7 +3,7 @@ services:
     build:
       context: ../../
       dockerfile: docker/dev/Dockerfile
-    container_name: service
+    container_name: golang-backend
     networks:
       - integration
     # environment:
@@ -26,7 +26,7 @@ services:
     build:
       context: ../../
       dockerfile: docker/test-integration/Dockerfile
-    container_name: tester
+    container_name: golang-backend-test
     networks:
       - integration
     depends_on:
