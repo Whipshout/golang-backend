@@ -41,7 +41,7 @@ help:
 	@echo "Targets:"
 	@echo "  run-local       	Build and Run the Go binary locally"
 	@echo "  run-dev       	Build and Run using Docker"
-	@echo "  tet-integration   	Run integration tests using Docker"
+	@echo "  test-integration   	Run integration tests using Docker"
 	@echo "  clean              	Clean up all Docker images and containers"
 	@echo "  lint               	Run linter"
 	@echo "  help               	Display this help message"

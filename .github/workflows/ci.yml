@@ -61,5 +61,5 @@ jobs:
           sudo apt-get install -y docker-compose
 
       - name: Running integration tests
-        run: bash ./scripts/test-integration.sh
+        run: make test-integration
         continue-on-error: false
