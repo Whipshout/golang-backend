@@ -23,6 +23,8 @@ local: local-build local-run
 # Run integration tests
 .PHONY: integration-tests
 integration-tests:
+	@echo "Building Docker images..."
+	@$(DOCKER_COMPOSE_TEST) build --no-cache
 	@echo "Running integration tests..."
 	@$(DOCKER_COMPOSE_TEST) up --abort-on-container-exit --exit-code-from test || (echo "Tests failed. Showing logs:" && $(DOCKER_COMPOSE_TEST) logs)
 	@$(DOCKER_COMPOSE_TEST) down
