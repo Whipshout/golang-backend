@@ -5,7 +5,7 @@ services:
       dockerfile: docker/dev/Dockerfile
     container_name: service
     networks:
-      - integration
+      - test-integration
     # environment:
     #   POSTGRES_HOST: postgres
     #   POSTGRES_USER: postgres_user
@@ -28,7 +28,7 @@ services:
       dockerfile: docker/test-integration/Dockerfile
     container_name: tester
     networks:
-      - integration
+      - test-integration
     depends_on:
       - service
     logging:
@@ -43,7 +43,7 @@ services:
 #      POSTGRES_PASSWORD: postgres_password
 #      POSTGRES_DB: postgres_db
 #    networks:
-#      - integration
+#      - test-integration
 #    logging:
 #      driver: none
 #
@@ -52,7 +52,7 @@ services:
 #    container_name: mongo
 #    restart: always
 #    networks:
-#      - integration
+#      - test-integration
 #    logging:
 #      driver: none
 #
@@ -61,10 +61,10 @@ services:
 #    container_name: redis
 #    restart: always
 #    networks:
-#      - integration
+#      - test-integration
 #    logging:
 #      driver: none
 
 networks:
-  integration:
+  test-integration:
     driver: bridge
