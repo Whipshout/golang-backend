@@ -26,7 +26,7 @@ integration-tests:
 	@echo "Building Docker images..."
 	@$(DOCKER_COMPOSE_TEST) build --no-cache
 	@echo "Running integration tests..."
-	@$(DOCKER_COMPOSE_TEST) up --abort-on-container-exit --exit-code-from test || (echo "Tests failed. Showing logs:" && $(DOCKER_COMPOSE_TEST) logs)
+	@$(DOCKER_COMPOSE_TEST) up --abort-on-container-exit --exit-code-from test || (echo "Tests failed. Showing logs:" && $(DOCKER_COMPOSE_TEST) logs -t)
 	@$(DOCKER_COMPOSE_TEST) down
 
 # Clean up test Docker images and containers
