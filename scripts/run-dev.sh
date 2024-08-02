@@ -13,6 +13,6 @@ if [[ $directory == *"/scripts" ]]; then
   cd ..
 fi
 
-docker-compose -p dev -f docker/dev/docker-compose.yml up --build --abort-on-container-exit
+docker-compose -p dev -f docker/dev/docker-compose.yml up --build --no-cache --abort-on-container-exit
 
 cleanup

@@ -9,4 +9,3 @@ fi
 golangci-lint run
 
 echo "No linting errors"
-
