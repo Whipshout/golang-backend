@@ -19,8 +19,6 @@ services:
 #      - redis
     ports:
       - "8080:8080"
-    logging:
-      driver: none
 
   tester:
     build:
@@ -31,8 +29,6 @@ services:
       - test-integration
     depends_on:
       - service
-    logging:
-      driver: none
 
 #  postgres:
 #    image: postgres:latest
