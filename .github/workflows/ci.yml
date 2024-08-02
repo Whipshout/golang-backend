@@ -32,9 +32,13 @@ jobs:
           version: latest
           args: --timeout 5m ./...
 
-  integration:
+  tests:
+    strategy:
+      matrix:
+        test: ['integration']
+      fail-fast: false
+    name: ${{ matrix.test }} tests
     runs-on: ubuntu-latest
-    needs: lint
 
     steps:
       - name: Checkout code
@@ -60,6 +64,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y docker-compose
 
-      - name: Running integration tests
-        run: make test-integration
+      - name: Running ${{ matrix.test }} tests
+        run: make test-${{ matrix.test }}
         continue-on-error: false
