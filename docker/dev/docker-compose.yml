@@ -1,24 +1,24 @@
 version: '3.8'
 
 services:
-  app:
+  service:
     build:
       context: ../..
       dockerfile: docker/dev/Dockerfile
-    container_name: golang-backend
+    container_name: service
     ports:
       - "8080:8080"
 #    depends_on:
 #      - postgres
 #      - mongo
 #      - redis
-    environment:
-      POSTGRES_HOST: postgres
-      POSTGRES_USER: postgres_user
-      POSTGRES_PASSWORD: postgres_password
-      POSTGRES_DB: postgres_db
-      MONGO_HOST: mongo
-      REDIS_HOST: redis
+    # environment:
+    #   POSTGRES_HOST: postgres
+    #   POSTGRES_USER: postgres_user
+    #   POSTGRES_PASSWORD: postgres_password
+    #   POSTGRES_DB: postgres_db
+    #   MONGO_HOST: mongo
+    #   REDIS_HOST: redis
 
 #  postgres:
 #    image: postgres:latest

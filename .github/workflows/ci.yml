@@ -1,4 +1,4 @@
-name: Lint and Tests
+name: Continuous Integration
 
 on:
   pull_request:
@@ -55,10 +55,10 @@ jobs:
       - name: Download dependencies
         run: go mod download
 
-      - name: Install Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
+      # - name: Install Docker Compose
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y docker-compose
 
       - name: Running integration tests
         run: bash ./scripts/test-integration.sh

@@ -9,7 +9,7 @@ import (
 )
 
 func TestPingRoute(t *testing.T) {
-	url := "http://app:8080/ping"
+	url := "http://service:8080/ping"
 
 	resp, err := http.Get(url)
 

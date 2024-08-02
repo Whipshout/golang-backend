@@ -6,14 +6,9 @@ if [[ $directory == *"/scripts" ]]; then
   cd ..
 fi
 
-docker-compose -f docker/test/docker-compose.yml build
-docker-compose -f docker/test/docker-compose.yml up --force-recreate --abort-on-container-exit
+docker-compose -p tests -f docker/test-integration/docker-compose.yml build
+docker-compose -p tests -f docker/test-integration/docker-compose.yml up --force-recreate --abort-on-container-exit --exit-code-from tester
+EXIT_CODE=$?
 
-CODE=0
-docker-compose -f docker/test/docker-compose.yml ps -q | xargs docker inspect -f '{{ .State.ExitCode }}' | while read code; do
-    if [ "$code" == "1" ]; then
-       CODE=-1
-    fi
-done
-docker-compose -f docker/test/docker-compose.yml down
-exit $CODE
+docker-compose -p tests -f docker/test-integration/docker-compose.yml down
+exit $EXIT_CODE

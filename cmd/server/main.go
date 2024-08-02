@@ -8,10 +8,11 @@ import (
 	"os/signal"
 	"time"
 
+	"golang-backend/pkg/log"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/zap"
-	"golang-backend/pkg/log"
 )
 
 func main() {
@@ -20,9 +21,8 @@ func main() {
 		panic(err)
 	}
 	defer func(logger *zap.Logger) {
-		err := logger.Sync()
-		if err != nil {
-			panic(err)
+		if err := logger.Sync(); err != nil && err.Error() != "sync /dev/stderr: invalid argument" {
+			logger.Fatal("Failed to sync logger", zap.Error(err))
 		}
 	}(logger)
 

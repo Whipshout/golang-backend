@@ -1,11 +1,11 @@
 services:
-  app:
+  service:
     build:
       context: ../../
       dockerfile: docker/dev/Dockerfile
-    container_name: golang-backend
+    container_name: service
     networks:
-      - test-net
+      - integration
     # environment:
     #   POSTGRES_HOST: postgres
     #   POSTGRES_USER: postgres_user
@@ -22,15 +22,17 @@ services:
     logging:
       driver: none
 
-  test:
+  tester:
     build:
       context: ../../
-      dockerfile: docker/test/Dockerfile
-    container_name: golang-backend-test
+      dockerfile: docker/test-integration/Dockerfile
+    container_name: tester
     networks:
-      - test-net
+      - integration
     depends_on:
-      - app
+      - service
+    logging:
+      driver: none
 
 #  postgres:
 #    image: postgres:latest
@@ -41,7 +43,7 @@ services:
 #      POSTGRES_PASSWORD: postgres_password
 #      POSTGRES_DB: postgres_db
 #    networks:
-#      - test-net
+#      - integration
 #    logging:
 #      driver: none
 #
@@ -50,7 +52,7 @@ services:
 #    container_name: mongo
 #    restart: always
 #    networks:
-#      - test-net
+#      - integration
 #    logging:
 #      driver: none
 #
@@ -59,10 +61,10 @@ services:
 #    container_name: redis
 #    restart: always
 #    networks:
-#      - test-net
+#      - integration
 #    logging:
 #      driver: none
 
 networks:
-  test-net:
+  integration:
     driver: bridge
