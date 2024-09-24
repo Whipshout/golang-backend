@@ -8,6 +8,7 @@ import (
 	"os/signal"
 	"time"
 
+	"golang-backend/pkg/limiter"
 	"golang-backend/pkg/log"
 
 	"github.com/labstack/echo/v4"
@@ -31,6 +32,7 @@ func main() {
 	e.Use(middleware.Secure())
 	e.Use(middleware.Recover())
 	e.Use(log.NewRequestLoggerMiddleware(logger))
+	e.Use(middleware.RateLimiterWithConfig(limiter.RateLimiterConfig()))
 
 	e.GET("/ping", func(c echo.Context) error {
 		return c.String(http.StatusOK, "pong")
