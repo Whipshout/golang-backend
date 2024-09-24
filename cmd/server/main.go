@@ -11,6 +11,7 @@ import (
 	"golang-backend/pkg/log"
 	"golang-backend/pkg/middlewares"
 
+	"github.com/labstack/echo-contrib/echoprometheus"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/zap"
@@ -34,6 +35,13 @@ func main() {
 	e.Use(log.NewRequestLoggerMiddleware(logger))
 	e.Use(middleware.RateLimiterWithConfig(middlewares.RateLimiterConfig()))
 	e.Use(middleware.TimeoutWithConfig(middlewares.TimeoutConfig()))
+	e.Use(echoprometheus.NewMiddleware("backend"))
+
+	// To avoid random error with prometheus requesting a favicon O_O
+	e.GET("/favicon.ico", func(c echo.Context) error {
+		return c.NoContent(http.StatusNoContent)
+	})
+	e.GET("/metrics", echoprometheus.NewHandler())
 
 	e.GET("/ping", func(c echo.Context) error {
 		return c.String(http.StatusOK, "pong")
