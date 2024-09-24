@@ -1,4 +1,4 @@
-package limiter
+package middlewares
 
 import (
 	"net/http"
