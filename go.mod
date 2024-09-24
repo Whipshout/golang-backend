@@ -1,6 +1,6 @@
 module golang-backend
 
-go 1.22
+go 1.23.1
 
 require (
 	github.com/labstack/echo-contrib v0.17.1
